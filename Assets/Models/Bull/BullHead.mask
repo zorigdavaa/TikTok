@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BullHead
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Bull
+    m_Weight: 0
+  - m_Path: Horn
+    m_Weight: 0
+  - m_Path: rig_deform
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-breast.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-breast.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.L/DEF-front_shin.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.L/DEF-front_shin.L/DEF-front_foot.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.L/DEF-front_shin.L/DEF-front_foot.L/DEF-front_toe.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.R/DEF-front_shin.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.R/DEF-front_shin.R/DEF-front_foot.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-front_thigh.R/DEF-front_shin.R/DEF-front_foot.R/DEF-front_toe.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-pelvis.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-pelvis.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-shoulder.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-shoulder.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.003
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.003/DEF-spine.002
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.003/DEF-spine.002/DEF-spine.001
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.003/DEF-spine.002/DEF-spine.001/DEF-spine
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.004
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005/DEF-spine.006
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008/DEF-spine.009
+    m_Weight: 1
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008/DEF-spine.009/DEF-spine.010
+    m_Weight: 1
+  - m_Path: rig_deform/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008/DEF-spine.009/DEF-spine.010/DEF-spine.011
+    m_Weight: 1
+  - m_Path: rig_deform/DEF-thigh.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.L/DEF-shin.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.L/DEF-shin.L/DEF-foot.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.L/DEF-shin.L/DEF-foot.L/DEF-toe.L
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.R/DEF-shin.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.R/DEF-shin.R/DEF-foot.R
+    m_Weight: 0
+  - m_Path: rig_deform/DEF-thigh.R/DEF-shin.R/DEF-foot.R/DEF-toe.R
+    m_Weight: 0
