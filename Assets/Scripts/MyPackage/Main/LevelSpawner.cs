@@ -20,9 +20,9 @@ namespace ZPackage
         }
         private void Start()
         {
-            InstantiateHana(5);
-            InstantiateBox(10);
-            InstantiateCollect(10);
+            // InstantiateHana(5);
+            // InstantiateBox(10);
+            // InstantiateCollect(10);
         }
         float lastHanaPos = 35;
         private void InstantiateHana(int v)
