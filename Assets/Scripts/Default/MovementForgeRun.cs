@@ -30,7 +30,7 @@ public class MovementForgeRun : Mb
                     LastFrameFingerPos();
                 }
 
-                if (IsClick && transform.position.x >= -6.80f && transform.position.x <= 6.80f && !shouldROt)
+                if (IsClick && transform.position.x >= -2.80f && transform.position.x <= 2.80f && !shouldROt)
                 {
                     targetX += (Input.mousePosition.x - lastFrameFingerPositionX) * controlSensitivity;
 
@@ -54,13 +54,13 @@ public class MovementForgeRun : Mb
                 else if (!IsClick && !shouldROt)
                     childModel.localRotation = Quaternion.Lerp(childModel.localRotation, Quaternion.Euler(0, 0, 0), Time.fixedDeltaTime * 5);
 
-                if (transform.position.x < -6.80f)
+                if (transform.position.x < -2.80f)
                 {
-                    transform.position.ChangeX(-6.78f);
+                    transform.position = transform.position.ChangeX(-2.78f);
                 }
-                else if (transform.position.x > 6.80f)
+                else if (transform.position.x > 2.8f)
                 {
-                    transform.position.ChangeX(6.78f);
+                    transform.position = transform.position.ChangeX(2.78f);
                 }
             }
             else if (targetPos)
