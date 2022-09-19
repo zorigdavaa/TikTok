@@ -33,6 +33,17 @@ public class Player : Character
         // cameraController.Zoom(0.5f, 20, () => cameraController.Zoom(1, 60));
     }
 
+    internal void DoAction(GateType gateType)
+    {
+        switch (gateType)
+        {
+            case GateType.sword: print("sword"); break;
+            case GateType.dance: animationController.Dance(); break;
+            default:
+                break;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Collect collect = other.GetComponent<Collect>();

@@ -60,6 +60,11 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    internal void Dance()
+    {
+        animator.SetTrigger("dance");
+    }
+
     internal void Jump()
     {
         // animationState = AnimationState.Jump;
