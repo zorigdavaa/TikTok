@@ -12,7 +12,8 @@ public class Bot : Character
     private void Start()
     {
         Target = FindObjectOfType<Player>().transform;
-        movement.GoToPosition(Target);
+        // movement.GoToPosition(Target);
+        animationController.Sword();
         // animationController.Set8WayLayerWeight(false);
         animationController.OnAttackEvent += OnAttack;
     }
@@ -33,15 +34,15 @@ public class Bot : Character
     }
     bool Attacking = false;
 
-    private void Update()
-    {
-        if (Vector3.Distance(Target.position, transform.position) < 4 && !Attacking && IsAlive)
-        {
-            Attacking = true;
-            animationController.Attack();
-            movement.Cancel();
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Vector3.Distance(Target.position, transform.position) < 4 && !Attacking && IsAlive)
+    //     {
+    //         Attacking = true;
+    //         animationController.Attack();
+    //         movement.Cancel();
+    //     }
+    // }
 
     // private void OnCollisionEnter(Collision other)
     // {

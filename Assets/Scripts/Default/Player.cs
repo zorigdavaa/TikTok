@@ -30,6 +30,7 @@ public class Player : Character
         GameManager.Instance.GameOverEvent += OnGameOver;
         GameManager.Instance.GamePlay += OnGamePlay;
         GameManager.Instance.LevelCompleted += OnGameOver;
+
         // cameraController.Zoom(0.5f, 20, () => cameraController.Zoom(1, 60));
     }
 
@@ -73,8 +74,9 @@ public class Player : Character
 
     private void OnGamePlay(object sender, EventArgs e)
     {
-        movement.SetSpeed(1);
-        movement.SetControlAble(true);
+        // movement.SetSpeed(1);
+        // movement.SetControlAble(true);
+        animationController.Dance();
     }
 
     private void OnGameOver(object sender, EventArgs e)

@@ -64,6 +64,10 @@ public class AnimationController : MonoBehaviour
     {
         animator.SetTrigger("dance");
     }
+    internal void Sword()
+    {
+        animator.SetTrigger("sword");
+    }
 
     internal void Jump()
     {
