@@ -74,9 +74,9 @@ public class Player : Character
 
     private void OnGamePlay(object sender, EventArgs e)
     {
-        // movement.SetSpeed(1);
-        // movement.SetControlAble(true);
-        animationController.Dance();
+        movement.SetSpeed(1);
+        movement.SetControlAble(true);
+        // animationController.Dance();
     }
 
     private void OnGameOver(object sender, EventArgs e)
