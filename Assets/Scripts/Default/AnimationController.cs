@@ -42,6 +42,12 @@ public class AnimationController : MonoBehaviour
     {
         OnSpearShoot?.Invoke(this, EventArgs.Empty);
     }
+
+    internal void SetWalk(float value)
+    {
+        animator.SetFloat("walk", value);
+    }
+
     public void Stretch(bool value)
     {
         animator.SetBool("stretch", value);

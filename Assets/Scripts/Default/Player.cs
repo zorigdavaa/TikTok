@@ -9,12 +9,44 @@ using UnityEngine.Pool;
 
 public class Player : Character
 {
-    [SerializeField] Transform Horn;
     CameraController cameraController;
     SoundManager soundManager;
     UIBar bar;
     URPPP effect;
-    int killCount;
+    private int walkType;
+    public int WalkType
+    {
+        get { return walkType; }
+        set
+        {
+            walkType = value;
+            walkType = Mathf.Clamp(walkType, 0, 4);
+            animationController.SetWalk(walkType);
+        }
+    }
+    private float famous;
+    public float Famous
+    {
+        get { return famous; }
+        set
+        {
+            famous = value;
+            CanvasManager.Instance.HudFamous(value);
+        }
+    }
+
+
+    private int likeCount;
+    public int LikeCount
+    {
+        get { return likeCount; }
+        set
+        {
+            likeCount = value;
+            CanvasManager.Instance.HudCoin(likeCount.ToString());
+        }
+    }
+
     int enemyCount;
 
     // Start is called before the first frame update
@@ -30,7 +62,8 @@ public class Player : Character
         GameManager.Instance.GameOverEvent += OnGameOver;
         GameManager.Instance.GamePlay += OnGamePlay;
         GameManager.Instance.LevelCompleted += OnGameOver;
-
+        LikeCount = 0;
+        Famous = 0;
         // cameraController.Zoom(0.5f, 20, () => cameraController.Zoom(1, 60));
     }
 
@@ -50,20 +83,10 @@ public class Player : Character
         Collect collect = other.GetComponent<Collect>();
         if (collect)
         {
-            if (collect.type == CollectType.Flower)
-            {
-                Horn.localScale += Vector3.one * 0.2f;
-            }
-            else
-            {
-                Horn.localScale += -Vector3.one * 0.2f;
-                if (Horn.localScale.x < 0)
-                {
-                    Horn.localScale = Vector3.zero;
-                }
-            }
-            // inventory.AddInventory(collect.gameObject);
-            Destroy(collect.gameObject);
+            LikeCount++;
+            Famous += 20;
+            collect.PlayerParticle();
+            Destroy(other.gameObject);
         }
     }
     public override void Die()
@@ -74,7 +97,7 @@ public class Player : Character
 
     private void OnGamePlay(object sender, EventArgs e)
     {
-        movement.SetSpeed(1);
+        movement.SetSpeed(0.5f);
         movement.SetControlAble(true);
         // animationController.Dance();
     }

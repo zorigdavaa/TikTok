@@ -4,11 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : GenericSingleton<CanvasManager>
 {
     public GameObject beforeStartMenu, afterLostMenu, afterWinMenu, Coin, Level, Hud;
     [SerializeField] TMP_Text CoinText, ScoreText, ScoreMultipText, LevelText, ThrowCount;
+    [SerializeField] Image famous;
+    [SerializeField] Animation CameraLight;
     private void OnEnable()
     {
         CoinText = Coin.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -37,6 +40,10 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     {
         CoinText.text = value;
     }
+    public void HudFamous(float value)
+    {
+        famous.fillAmount = value / 100;
+    }
     public void HudScore(string value)
     {
         ScoreText.text = value;
@@ -52,6 +59,10 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     public void HudLevel(string value)
     {
         LevelText.text = value;
+    }
+    public void CameraLightPlay()
+    {
+        CameraLight.Play();
     }
 
     private void OnGameOver(object sender, EventArgs e)

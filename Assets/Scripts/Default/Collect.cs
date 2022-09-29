@@ -5,15 +5,25 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour
 {
+    [SerializeField] List<GameObject> grxs;
+    [SerializeField] ParticleSystem particle;
+    [SerializeField] List<Texture> particleSprites;
     public CollectType type;
     Color _color;
     private void Start()
     {
-        foreach (Transform child in transform)
+        foreach (GameObject child in grxs)
         {
-            child.gameObject.SetActive(false);
+            child.SetActive(false);
         }
-        transform.GetChild((int)type).gameObject.SetActive(true);
+        grxs[(int)type].SetActive(true);
+        particle.GetComponent<ParticleSystemRenderer>().material.SetTexture("_BaseMap", particleSprites[(int)type]);
+    }
+    public void PlayerParticle()
+    {
+        particle.Play();
+        particle.transform.SetParent(null);
+        Destroy(particle.gameObject, 2);
     }
 
     public Color GetColor()
@@ -54,5 +64,5 @@ public class Collect : MonoBehaviour
 }
 public enum CollectType
 {
-    Poop, Flower
+    Like, Love, Poop, Angry
 }

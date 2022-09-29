@@ -8,6 +8,7 @@ public class Movement : Mb
 {
     public AnimationController animationController;
     public float rotationSpeed = 10;
+    Player player;
 
     public float Speed = 0;
     public bool ControlAble;
@@ -43,7 +44,16 @@ public class Movement : Mb
     public void SetSpeed(float percent)
     {
         Speed = MaxSpeed * percent;
-        animationController.SetSpeed(Speed / MaxSpeed);
+        float walkIndex;
+        if (percent == 0)
+        {
+            walkIndex = 0;
+        }
+        else
+        {
+            walkIndex = player.WalkType;
+        }
+        animationController.SetWalk(walkIndex);
     }
     public float GetSpeed()
     {
