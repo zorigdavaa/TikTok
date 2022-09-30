@@ -12,6 +12,7 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     [SerializeField] TMP_Text CoinText, ScoreText, ScoreMultipText, LevelText, ThrowCount;
     [SerializeField] Image famous;
     [SerializeField] Animation CameraLight;
+    [SerializeField] GameObject Post;
     private void OnEnable()
     {
         CoinText = Coin.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
