@@ -65,6 +65,29 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     {
         CameraLight.Play();
     }
+    public void ShowPost()
+    {
+        StartCoroutine(LocalCoroutine());
+        IEnumerator LocalCoroutine()
+        {
+            Post.SetActive(true);
+            yield return new WaitForSeconds(2);
+            Post.SetActive(false);
+            // float t = 0;
+            // float time = 0;
+            // float duration = 1;
+            // Vector3 initialPosition = transform.position;
+            // while (time < duration)
+            // {
+            //     t = time / duration;
+            //     time += Time.deltaTime;
+            //     transform.position = Vector3.Lerp(initialPosition, toPos, t);
+
+            //     yield return null;
+            // }
+        }
+
+    }
 
     private void OnGameOver(object sender, EventArgs e)
     {

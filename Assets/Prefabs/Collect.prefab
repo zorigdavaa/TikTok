@@ -54,6 +54,8 @@ MonoBehaviour:
   - {fileID: 1969936824320221771}
   - {fileID: 1969936825009941036}
   - {fileID: 1969936824995186315}
+  particle: {fileID: 0}
+  particleSprites: []
   type: 0
 --- !u!135 &1700098737408881930
 SphereCollider:
