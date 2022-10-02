@@ -11,7 +11,7 @@ public class CaptureCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = transform.GetChild(0).GetComponent<Camera>();
+        // cam = transform.GetChild(0).GetComponent<Camera>();
     }
     private void Update()
     {

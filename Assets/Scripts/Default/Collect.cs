@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Collect : MonoBehaviour
 {
@@ -9,15 +10,14 @@ public class Collect : MonoBehaviour
     [SerializeField] ParticleSystem particle;
     [SerializeField] List<Texture> particleSprites;
     public CollectType type;
+    public bool typeSettled = false;
     Color _color;
     private void Start()
     {
-        foreach (GameObject child in grxs)
+        if (typeSettled)
         {
-            child.SetActive(false);
+            SetType(type);
         }
-        grxs[(int)type].SetActive(true);
-        particle.GetComponent<ParticleSystemRenderer>().material.SetTexture("_BaseMap", particleSprites[(int)type]);
     }
     public void PlayerParticle()
     {
@@ -55,6 +55,21 @@ public class Collect : MonoBehaviour
             GetComponent<Collider>().isTrigger = true;
             GetComponent<Rigidbody>().isKinematic = true;
         }
+    }
+    internal void SetType(int v)
+    {
+        SetType((CollectType)v);
+    }
+
+    internal void SetType(CollectType v)
+    {
+        type = v;
+        foreach (GameObject child in grxs)
+        {
+            child.SetActive(false);
+        }
+        grxs[(int)type].SetActive(true);
+        particle.GetComponent<ParticleSystemRenderer>().material.SetTexture("_BaseMap", particleSprites[(int)type]);
     }
 
     internal void HideCollider()

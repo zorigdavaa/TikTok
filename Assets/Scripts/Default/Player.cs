@@ -30,7 +30,8 @@ public class Player : Character
         get { return famous; }
         set
         {
-            famous = value;
+            // famous = value;
+            famous = Mathf.Clamp(value, 0, 100);
             CanvasManager.Instance.HudFamous(value);
         }
     }
@@ -83,10 +84,22 @@ public class Player : Character
         Collect collect = other.GetComponent<Collect>();
         if (collect)
         {
-            LikeCount++;
-            Famous += 20;
+            if ((int)collect.type < 2)
+            {
+                LikeCount++;
+                Famous += 1;
+            }
+            else
+            {
+                LikeCount--;
+                Famous -= 1;
+            }
             collect.PlayerParticle();
             Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("Ice"))
+        {
+            animationController.FallBack();
         }
     }
     public override void Die()

@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968aab4c69941d44b9d5f19bd0423784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 7654937567438597864}
   texture: {fileID: 8400000, guid: 90ca731ded362b744ada0edf9d1d113c, type: 2}
 --- !u!1 &7654937567438597871
 GameObject:

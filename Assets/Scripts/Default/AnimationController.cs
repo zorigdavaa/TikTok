@@ -82,6 +82,11 @@ public class AnimationController : MonoBehaviour
         // animator.ResetTrigger("down");
         animator.SetTrigger("jump");
     }
+
+    internal void FallBack()
+    {
+        animator.SetTrigger("fallBack");
+    }
 }
 public enum AnimationState
 {
