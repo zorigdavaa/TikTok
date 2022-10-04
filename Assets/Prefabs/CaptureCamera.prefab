@@ -141,9 +141,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7654937566144520292}
   - component: {fileID: 7654937566144520295}
+  - component: {fileID: 431179782}
   m_Layer: 0
   m_Name: CaptureCamera
-  m_TagString: Untagged
+  m_TagString: CameraMan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,6 +180,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 7654937567438597864}
   texture: {fileID: 8400000, guid: 90ca731ded362b744ada0edf9d1d113c, type: 2}
+--- !u!65 &431179782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654937566144520293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 7}
 --- !u!1 &7654937567438597871
 GameObject:
   m_ObjectHideFlags: 0

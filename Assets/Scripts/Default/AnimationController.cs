@@ -48,10 +48,6 @@ public class AnimationController : MonoBehaviour
         animator.SetFloat("walk", value);
     }
 
-    public void Stretch(bool value)
-    {
-        animator.SetBool("stretch", value);
-    }
     public void Set8WayLayerWeight(bool value)
     {
         if (value)
@@ -86,6 +82,11 @@ public class AnimationController : MonoBehaviour
     internal void FallBack()
     {
         animator.SetTrigger("fallBack");
+    }
+
+    internal void SetPose(bool v)
+    {
+        animator.SetBool("pose", v);
     }
 }
 public enum AnimationState

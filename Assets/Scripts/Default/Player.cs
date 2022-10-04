@@ -13,17 +13,17 @@ public class Player : Character
     SoundManager soundManager;
     UIBar bar;
     URPPP effect;
-    private int walkType;
-    public int WalkType
-    {
-        get { return walkType; }
-        set
-        {
-            walkType = value;
-            walkType = Mathf.Clamp(walkType, 0, 4);
-            animationController.SetWalk(walkType);
-        }
-    }
+    // private int walkType;
+    // public int WalkType
+    // {
+    //     get { return walkType; }
+    //     set
+    //     {
+    //         walkType = value;
+    //         walkType = Mathf.Clamp(walkType, 0, 4);
+    //         animationController.SetWalk(walkType);
+    //     }
+    // }
     private float famous;
     public float Famous
     {
@@ -32,6 +32,16 @@ public class Player : Character
         {
             // famous = value;
             famous = Mathf.Clamp(value, 0, 100);
+            animationController.SetWalk(Mathf.CeilToInt(famous / 100 * 5 - 1f));
+            // switch (famous)
+            // {
+            //     case < 20: animationController.SetWalk(0); break;
+            //     case < 40: animationController.SetWalk(1); break;
+            //     case < 60: animationController.SetWalk(2); break;
+            //     case < 80: animationController.SetWalk(3); break;
+            //     case > 80: animationController.SetWalk(4); break;
+            //     default: break;
+            // }
             CanvasManager.Instance.HudFamous(value);
         }
     }
@@ -100,6 +110,10 @@ public class Player : Character
         else if (other.gameObject.CompareTag("Ice"))
         {
             animationController.FallBack();
+        }
+        else if (other.gameObject.CompareTag("CameraMan"))
+        {
+            
         }
     }
     public override void Die()
