@@ -79,7 +79,7 @@ public class Player : Character
         Famous = 0;
         for (int i = 0; i < poseButtons.Count; i++)
         {
-            poseButtons[i].onClick.AddListener(() => DoPose(i));
+            poseButtons[i].onClick.AddListener(() => DoPose(Random.Range(0, 5)));
             print(i);
         }
 

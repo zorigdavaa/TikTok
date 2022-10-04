@@ -87,11 +87,13 @@ public class AnimationController : MonoBehaviour
     internal void SetPose(bool v)
     {
         animator.SetBool("pose", v);
+
     }
 
     internal void DoPose(int value)
     {
-        animator.SetFloat("poses", value);
+        // animator.SetFloat("poses", value);
+        animator.SetInteger("poses", value);
     }
 }
 public enum AnimationState
