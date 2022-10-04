@@ -6,6 +6,7 @@ using ZPackage;
 using ZPackage.Helper;
 using Random = UnityEngine.Random;
 using UnityEngine.Pool;
+using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -13,6 +14,7 @@ public class Player : Character
     SoundManager soundManager;
     UIBar bar;
     URPPP effect;
+    [SerializeField] List<Button> poseButtons;
     // private int walkType;
     // public int WalkType
     // {
@@ -75,7 +77,20 @@ public class Player : Character
         GameManager.Instance.LevelCompleted += OnGameOver;
         LikeCount = 0;
         Famous = 0;
+        for (int i = 0; i < poseButtons.Count; i++)
+        {
+            poseButtons[i].onClick.AddListener(() => DoPose(i));
+            print(i);
+        }
+
         // cameraController.Zoom(0.5f, 20, () => cameraController.Zoom(1, 60));
+    }
+    private void Update()
+    {
+        if (Posing && IsClick)
+        {
+            transform.GetChild(0).Rotate(new Vector3(0, Input.GetAxis("Mouse X") * 3, 0));
+        }
     }
 
     internal void DoAction(GateType gateType)
@@ -88,6 +103,7 @@ public class Player : Character
                 break;
         }
     }
+    bool Posing = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -113,7 +129,11 @@ public class Player : Character
         }
         else if (other.gameObject.CompareTag("CameraMan"))
         {
-            
+            movement.SetSpeed(0);
+            movement.SetControlAble(false);
+            animationController.SetPose(true);
+            print("ss");
+            Posing = true;
         }
     }
     public override void Die()
@@ -127,6 +147,14 @@ public class Player : Character
         movement.SetSpeed(0.5f);
         movement.SetControlAble(true);
         // animationController.Dance();
+    }
+    public void DoPose(int value)
+    {
+        animationController.DoPose(value);
+        print(value);
+        CanvasManager.Instance.ShowPost();
+        FindObjectOfType<CaptureCamera>().CaptureImage();
+
     }
 
     private void OnGameOver(object sender, EventArgs e)
