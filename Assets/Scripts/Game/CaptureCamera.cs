@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class CaptureCamera : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] RenderTexture texture;
+    public EventHandler OnImageCapture;
 
     // Start is called before the first frame update
     void Start()
@@ -26,5 +28,19 @@ public class CaptureCamera : MonoBehaviour
         cam.targetTexture = texture;
         cam.Render();
         cam.targetTexture = null;
+        CanvasManager.Instance.ShowPost();
+    }
+
+    internal void SubscribeButton()
+    {
+        CanvasManager.Instance.GetCaptureButton().GetComponent<Button>().onClick.AddListener
+        (
+            () =>
+            {
+                CaptureImage();
+                OnImageCapture?.Invoke(this, EventArgs.Empty);
+            }
+        );
+
     }
 }

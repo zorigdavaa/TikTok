@@ -15,6 +15,9 @@ public class Player : Character
     UIBar bar;
     URPPP effect;
     [SerializeField] List<Button> poseButtons;
+    [SerializeField] List<PosObj> posObjs;
+    [SerializeField] ParticleSystem audienceParticle;
+    [SerializeField] GameObject spin;
     // private int walkType;
     // public int WalkType
     // {
@@ -65,6 +68,7 @@ public class Player : Character
     // Start is called before the first frame update
     void Start()
     {
+        spin.SetActive(false);
         movement = GetComponent<MovementForgeRun>();
         soundManager = FindObjectOfType<SoundManager>();
         cameraController = FindObjectOfType<CameraController>();
@@ -77,10 +81,13 @@ public class Player : Character
         GameManager.Instance.LevelCompleted += OnGameOver;
         LikeCount = 0;
         Famous = 0;
+        posObjs.Shuffle();
+
         for (int i = 0; i < poseButtons.Count; i++)
         {
-            poseButtons[i].onClick.AddListener(() => DoPose(i));// i iig hadgalj chadku bn
-            print(i);
+            int iLocal = i;
+            poseButtons[i].onClick.AddListener(() => DoPose(posObjs[iLocal].PosIndex));
+            poseButtons[i].GetComponent<Image>().sprite = posObjs[iLocal].buttonSprite;
         }
 
         // cameraController.Zoom(0.5f, 20, () => cameraController.Zoom(1, 60));
@@ -129,13 +136,42 @@ public class Player : Character
         }
         else if (other.gameObject.CompareTag("CameraMan"))
         {
+            CaptureCamera captureCamera = other.GetComponent<CaptureCamera>();
+            captureCamera.SubscribeButton();
+            captureCamera.OnImageCapture += OnImageCapture;
             movement.SetSpeed(0);
             movement.SetControlAble(false);
             animationController.SetPose(true);
+            spin.SetActive(true);
             print("ss");
             Posing = true;
+            CanvasManager.Instance.ShowButtons(true);
         }
     }
+
+    private void OnImageCapture(object sender, EventArgs e)
+    {
+        CaptureCamera cam = (CaptureCamera)sender;
+        cam.OnImageCapture -= OnImageCapture;
+        CanvasManager.Instance.ShowButtons(false);
+        animationController.DoPose(0);
+        animationController.SetPose(false);
+        Posing = false;
+        spin.SetActive(false);
+        transform.GetChild(0).rotation = Quaternion.identity;
+        CanvasManager.Instance.CameraLightPlay();
+        StartCoroutine(LocalCoroutine());
+        IEnumerator LocalCoroutine()
+        {
+            yield return new WaitForSeconds(2);
+            audienceParticle.Play();
+            Famous += 25;
+            movement.SetSpeed(0.5f);
+            movement.SetControlAble(true);
+        }
+
+    }
+
     public override void Die()
     {
         base.Die();
@@ -152,8 +188,8 @@ public class Player : Character
     {
         animationController.DoPose(value);
         print(value);
-        CanvasManager.Instance.ShowPost();
-        FindObjectOfType<CaptureCamera>().CaptureImage();
+
+        // FindObjectOfType<CaptureCamera>().CaptureImage();
 
     }
 

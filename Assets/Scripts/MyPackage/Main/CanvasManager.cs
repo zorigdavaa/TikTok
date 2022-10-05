@@ -12,7 +12,7 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     [SerializeField] TMP_Text CoinText, ScoreText, ScoreMultipText, LevelText, ThrowCount;
     [SerializeField] Image famous;
     [SerializeField] Animation CameraLight;
-    [SerializeField] GameObject Post;
+    [SerializeField] GameObject Post, PoseButtons, CaptureButton;
     private void OnEnable()
     {
         CoinText = Coin.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -25,6 +25,7 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     private void Start()
     {
         Hud.SetActive(false);
+        ShowButtons(false);
     }
 
     private void OnGamePlay(object sender, EventArgs e)
@@ -87,6 +88,14 @@ public class CanvasManager : GenericSingleton<CanvasManager>
             // }
         }
 
+    }
+    public void ShowButtons(bool value)
+    {
+        PoseButtons.SetActive(value);
+    }
+    public GameObject GetCaptureButton()
+    {
+        return CaptureButton;
     }
 
     private void OnGameOver(object sender, EventArgs e)
