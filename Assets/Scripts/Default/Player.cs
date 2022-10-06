@@ -146,6 +146,7 @@ public class Player : Character
             print("ss");
             Posing = true;
             CanvasManager.Instance.ShowButtons(true);
+            CameraController.Instance.SetOffset(new Vector3(0, 4, -5), CameraController.Instance.transform.rotation.eulerAngles, 1);
         }
     }
 
@@ -160,6 +161,7 @@ public class Player : Character
         spin.SetActive(false);
         transform.GetChild(0).rotation = Quaternion.identity;
         CanvasManager.Instance.CameraLightPlay();
+        CameraController.Instance.SetOffset(new Vector3(0, 8, -8), CameraController.Instance.transform.rotation.eulerAngles, 1);
         StartCoroutine(LocalCoroutine());
         IEnumerator LocalCoroutine()
         {

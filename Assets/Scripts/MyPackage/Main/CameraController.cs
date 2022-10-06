@@ -9,9 +9,9 @@ namespace ZPackage
 
     public class CameraController : GenericSingleton<CameraController>
     {
-        [SerializeField] Transform followTf;
+        [SerializeField] Transform followTf, lastFollowing;
         [SerializeField] CamerShaker shaker;
-        Vector3 offset;
+        [SerializeField] Vector3 offset;
         Vector3 velocity = Vector3.zero;
         [SerializeField][Range(0.01f, 1f)] float smoothTime = 0.125f;
         Camera cam;
@@ -27,6 +27,7 @@ namespace ZPackage
             //offset = new Vector3(6, 14, -19);
             offset = transform.position - followTf.position;
             cam = transform.GetChild(0).GetComponent<Camera>();
+            Follow(followTf);
         }
         void OnGameStart()
         {
@@ -40,6 +41,14 @@ namespace ZPackage
                 // transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
                 transform.position = targetPos;
             }
+            // if (Input.GetKeyDown(KeyCode.Q))
+            // {
+            //     GoToPosition(new Vector3(10, 0, 20), new Vector3(0, 0, 0));
+            // }
+            // else if (Input.GetKeyDown(KeyCode.E))
+            // {
+            //     GotoDefault();
+            // }
         }
         // private void FixedUpdate()
         // {
@@ -57,32 +66,87 @@ namespace ZPackage
         // }
         public void Follow(Transform follow)
         {
+            lastFollowing = followTf;
             followTf = follow;
         }
+        public void FollowLast()
+        {
+            Follow(lastFollowing);
+        }
+        public void GoToPosition(Vector3 toPos, Vector3 rotation)
+        {
+            Follow(null);
+            StartCoroutine(LocalCoroutine());
+            IEnumerator LocalCoroutine()
+            {
+                float t = 0;
+                float time = 0;
+                float duration = 1;
+                Vector3 initialPosition = transform.position;
+                Quaternion initRot = transform.rotation;
+                Quaternion toRotation = Quaternion.Euler(rotation);
+                while (time < duration)
+                {
+                    time += Time.deltaTime;
+                    t = time / duration;
+                    transform.position = Vector3.Lerp(initialPosition, toPos, t);
+                    transform.rotation = Quaternion.Lerp(initRot, toRotation, t);
+
+                    yield return null;
+                }
+            }
+        }
+        public void GotoDefault()
+        {
+
+            StartCoroutine(LocalCoroutine());
+            IEnumerator LocalCoroutine()
+            {
+                float t = 0;
+                float time = 0;
+                float duration = 1;
+                Vector3 initialPosition = transform.position;
+                Vector3 toPos = lastFollowing.position + offset;
+                Quaternion initRot = transform.rotation;
+                Quaternion toRotation = Quaternion.Euler(new Vector3(30, 0, 0));
+                while (time < duration)
+                {
+                    time += Time.deltaTime;
+                    t = time / duration;
+                    transform.position = Vector3.Lerp(initialPosition, toPos, t);
+                    transform.rotation = Quaternion.Lerp(initRot, toRotation, t);
+
+                    yield return null;
+                }
+                FollowLast();
+            }
+        }
+
         Coroutine offsetCoroutine;
-        public void SetOffset(Vector3 offset, Vector3 rotation, float time)
+        public void SetOffset(Vector3 incominOff, Vector3 rotation, float duration)
         {
             if (offsetCoroutine != null)
             {
                 StopCoroutine(offsetCoroutine);
             }
-            offsetCoroutine = StartCoroutine(SetOffsetCor(offset, rotation, time));
-            IEnumerator SetOffsetCor(Vector3 IncomingOffset, Vector3 IncomingRotation, float duration)
+            offsetCoroutine = StartCoroutine(SetOffsetCor());
+            IEnumerator SetOffsetCor()
             {
                 float time = 0;
                 Vector3 startingOffset = offset;
                 Vector3 startingRotation = transform.eulerAngles;
                 Quaternion startQuaternin = transform.rotation;
-                Quaternion toRoataion = Quaternion.Euler(IncomingRotation);
+                Quaternion toRoataion = Quaternion.Euler(rotation);
                 while (time < duration)
                 {
                     time += Time.deltaTime;
-                    offset = Vector3.Lerp(startingOffset, IncomingOffset, time / duration);
+                    offset = Vector3.Lerp(startingOffset, incominOff, time / duration);
                     transform.rotation = Quaternion.Lerp(startQuaternin, toRoataion, time / duration);
                     //  transform.eulerAngles = Vector3.Lerp(startingRotation,IncomingRotation,time/duration);
                     yield return null;
                 }
-                offset = IncomingOffset;
+                offset = incominOff;
+                print(incominOff);
                 // transform.eulerAngles = IncomingRotation;
             }
         }
@@ -107,10 +171,32 @@ namespace ZPackage
                 Vector3 startingOffset = offset;
                 while (time < duration)
                 {
+                    time += Time.deltaTime;
                     float t = time / duration;
                     Vector3 offsets = Vector3.Lerp(startingOffset, target, t);
                     offset = offsets;
+                    yield return null;
+                }
+            }
+        }
+        public void SetRotation(Vector3 target, float duration = 1.0f)
+        {
+            StartCoroutine(SetRotationCor(target, duration));
+            //offset = target;
+            //while (offset != target)
+            //{
+            //offset = Vector3.SmoothDamp(offset, target, ref velocity, smoothTime);
+            //}
+            IEnumerator SetRotationCor(Vector3 target, float duration = 2.0f)
+            {
+                float time = 0;
+                Quaternion initRot = transform.rotation;
+                Quaternion targetRot = Quaternion.Euler(target);
+                while (time < duration)
+                {
                     time += Time.deltaTime;
+                    float t = time / duration;
+                    transform.rotation = Quaternion.Lerp(initRot,targetRot,t);
                     yield return null;
                 }
             }
