@@ -27,11 +27,12 @@ public class Girl : MonoBehaviour
         currentModelIndex = index;
 
     }
-    public void SpinModel()
+    public void SpinModel(float deg = 360, float duration = 0.7f)
     {
-        StartCoroutine(SpinModel(360, 0.7f));
+        StartCoroutine(SpinCor(deg, duration));
+
     }
-    private IEnumerator SpinModel(float degree)
+    IEnumerator SpinCor(float degree)
     {
         float time = 0;
         float duration = 0.5f;
@@ -44,7 +45,7 @@ public class Girl : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator SpinModel(float degree = 360, float duration = 0.5f)
+    IEnumerator SpinCor(float degree = 360, float duration = 0.5f)
     {
         float time = 0;
         // float duration = 0.5f;
@@ -58,15 +59,6 @@ public class Girl : MonoBehaviour
         {
             transform.localEulerAngles = Vector3.zero;
         }
-    }
-
-    public void UserGreeting()
-    {
-        // player.animationController.GreetUser();
-        // Timing.RunCoroutine(SpinModel(180, 0.5f));
-        // Func<float, IEnumerator<float>> func = new Func<float, IEnumerator<float>>(SpinModel);
-        // Timing.RunCoroutine(WaitCoroutine(2, func));
-        // Timing.RunCoroutine(SpinModel(180));
     }
     public void Bikini()
     {

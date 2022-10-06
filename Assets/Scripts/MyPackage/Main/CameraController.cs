@@ -73,6 +73,10 @@ namespace ZPackage
         {
             Follow(lastFollowing);
         }
+        public Camera GetCamera()
+        {
+            return cam;
+        }
         public void GoToPosition(Vector3 toPos, Vector3 rotation)
         {
             Follow(null);
@@ -146,7 +150,6 @@ namespace ZPackage
                     yield return null;
                 }
                 offset = incominOff;
-                print(incominOff);
                 // transform.eulerAngles = IncomingRotation;
             }
         }

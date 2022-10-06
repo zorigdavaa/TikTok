@@ -14,6 +14,7 @@ public class Player : Character
     SoundManager soundManager;
     UIBar bar;
     URPPP effect;
+    Girl girl;
     [SerializeField] List<Button> poseButtons;
     [SerializeField] List<PosObj> posObjs;
     [SerializeField] ParticleSystem audienceParticle;
@@ -68,6 +69,7 @@ public class Player : Character
     // Start is called before the first frame update
     void Start()
     {
+        girl = transform.GetChild(0).GetComponent<Girl>();
         spin.SetActive(false);
         movement = GetComponent<MovementForgeRun>();
         soundManager = FindObjectOfType<SoundManager>();
@@ -143,6 +145,7 @@ public class Player : Character
             movement.SetControlAble(false);
             animationController.SetPose(true);
             spin.SetActive(true);
+            girl.SpinModel(180);
             print("ss");
             Posing = true;
             CanvasManager.Instance.ShowButtons(true);
@@ -162,6 +165,7 @@ public class Player : Character
         transform.GetChild(0).rotation = Quaternion.identity;
         CanvasManager.Instance.CameraLightPlay();
         CameraController.Instance.SetOffset(new Vector3(0, 8, -8), CameraController.Instance.transform.rotation.eulerAngles, 1);
+
         StartCoroutine(LocalCoroutine());
         IEnumerator LocalCoroutine()
         {

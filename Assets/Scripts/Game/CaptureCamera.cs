@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ZPackage;
 
 public class CaptureCamera : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CaptureCamera : MonoBehaviour
     void Start()
     {
         // cam = transform.GetChild(0).GetComponent<Camera>();
+        cam = CameraController.Instance.GetCamera();
     }
     private void Update()
     {
