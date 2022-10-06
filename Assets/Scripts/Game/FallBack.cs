@@ -10,6 +10,7 @@ public class FallBack : StateMachineBehaviour
     {
         player = animator.transform.parent.GetComponent<Player>();
         player.movement.SetSpeed(0);
+        player.movement.SetControlAble(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -25,6 +26,7 @@ public class FallBack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.movement.SetSpeed(0.5f);
+        player.movement.SetControlAble(true);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
