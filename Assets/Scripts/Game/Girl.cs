@@ -5,7 +5,13 @@ using System;
 
 public class Girl : MonoBehaviour
 {
-    public List<GameObject> models;
+    [Serializable]
+    public class GirlModel
+    {
+        public List<GameObject> objects;
+        public Avatar avatar;
+    }
+    public List<GirlModel> models;
     public int currentModelIndex { get; private set; } = 0;
     Player player;
 
@@ -22,8 +28,8 @@ public class Girl : MonoBehaviour
             Debug.LogError("model index: " + index + " out of range");
             return;
         }
-        models[currentModelIndex].SetActive(false);
-        models[index].SetActive(true);
+        // models[currentModelIndex].SetActive(false);
+        // models[index].SetActive(true);
         currentModelIndex = index;
 
     }
